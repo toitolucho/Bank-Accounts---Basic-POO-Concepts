@@ -70,4 +70,15 @@ class Persona
            string departamentos[9] {"La Paz","Oruro","Potosi","Cochabamba","Chuquisaca","Tarija","Pando","Beni","Santa Cruz"};
            return departamentos[ud-1];
         }
+
+        int getEdad(Fecha fechActual)
+        {
+            return fechActual.anio - fechaNacimiento.anio;
+        }
+
+        bool hoyEsCumpleanios(Fecha fechaActual)
+        {
+            return fechaActual.dia == fechaNacimiento.dia
+                && fechaActual.mes == fechaNacimiento.mes;
+        }
 };
