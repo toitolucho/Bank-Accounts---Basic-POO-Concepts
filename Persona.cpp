@@ -17,4 +17,15 @@ class Persona
     public:
         string nombres;
         string apellidos;
+
+        Persona()
+        {
+            nombres = "Luis";
+            apellidos = "Molina";
+        }
+
+        string getNombreCompleto()
+        {
+            return nombres + " " + apellidos;
+        }
 };
