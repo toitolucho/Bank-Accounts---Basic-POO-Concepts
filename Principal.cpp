@@ -1,10 +1,9 @@
 #include <iostream>
-#include "Persona.cpp"
+ #include "Banco.cpp"
 using namespace std;
-
 int main()
 {
-    Persona p;
-    cout<<"Hola Mundo cruel " << p.getNombreCompleto()<<endl;
+    cout<<"Gestion de Bancos"<<endl;
+    Banco b1;
     return 0;
 }

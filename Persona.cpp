@@ -1,5 +1,11 @@
 #include <iostream>
+//#include "Cuenta.cpp"
 using namespace std;
+
+#ifndef Persona_H
+#define Persona_H
+
+class Cuenta;
 
 //declaring Fecha struct
 struct Fecha
@@ -14,6 +20,7 @@ class Persona
     private:
         int ci;
         Fecha fechaNacimiento;
+        Cuenta *cuentaPersonal;
     public:
         string nombres;
         string apellidos;
@@ -82,3 +89,5 @@ class Persona
                 && fechaActual.mes == fechaNacimiento.mes;
         }
 };
+
+#endif /* Banco_H */

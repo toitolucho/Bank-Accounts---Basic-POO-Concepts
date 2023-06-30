@@ -1,8 +1,15 @@
-#include <iostream>
-#include "Persona.cpp";
-#include "Banco.cpp";
-#include "Servicio.cpp";
+
+#include <list >
+#include "Persona.cpp"
+// #include "Banco.cpp"
+#include "Servicio.cpp"
 using namespace std;
+#ifndef Cuenta_H
+#define Cuenta_H
+
+
+class Banco;
+
 enum TipoCuenta
 {
     CajaAhorro, PlazoFijo, Empresarial
@@ -12,25 +19,36 @@ enum TipoCuenta
 class Cuenta
 {
     private:
-        Persona duenio;
+        
         TipoCuenta tipo;
-        int nroCuenta;
-        float saldo;
-        Banco entidad;
+        
+        Banco *entidad;
 
     public:
+        int nroCuenta;
+        float saldo;
+        Persona duenio;
         Cuenta()
         {
             nroCuenta = 123456;
             saldo =0;
             tipo = TipoCuenta::CajaAhorro;
         }
-        Cuenta(Banco enti, Persona titular)
+        Cuenta(Persona titular)
         {
             nroCuenta = 123456;
             saldo =0;
             tipo = TipoCuenta::CajaAhorro;
-            entidad = enti;
+            // entidad = enti;
+            duenio = titular;
+        }
+
+        Cuenta(Banco *b,  Persona titular)
+        {
+            nroCuenta = 123456;
+            saldo =0;
+            tipo = TipoCuenta::CajaAhorro;
+            entidad = b;
             duenio = titular;
         }
 
@@ -82,6 +100,13 @@ class Cuenta
         {
             cout<<"Nro de Cuenta" << nroCuenta<< " correspondiente a" << duenio.getNombreCompleto()<<endl;
             cout<<"Su saldo actual es "<< saldo<<endl;
-            cout<<"Entidad Bancaria" << entidad.nombre<<endl;
+            // cout<<"Entidad Bancaria" << entidad.nombre<<endl;
         }
+
+
+        //D) Incopore una clase Transaccion que permita representar todos los movimientos de una cuenta.
+        // los mivimientos deben realizarse  en un DEPOSITO, RETIRO, TRANSFERENCIA Y UN PAGO SERVICIO
+        // los attributos de la clase seran los siguientes: Fecha, NroTransaccion (Autoenumerable), Monto, Tipo(DEPOSITO, RETIRO, TRANSFERENCIA Y UN PAGO SERVICIO) enumeracion
 };
+
+#endif 

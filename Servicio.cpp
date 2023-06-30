@@ -1,9 +1,13 @@
 #include <iostream>
 using namespace std;
 
+
+#ifndef Servicio_H
+#define Servicio_H
 class Servicio
 {
     private:
+        int idServicio;
         string nombre;
         float costo;
 
@@ -36,3 +40,4 @@ class Servicio
             return costo;
         }
 };
+#endif /* ARTISTA_H */
