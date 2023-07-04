@@ -44,7 +44,7 @@ class Banco
         //sea invocada y visualizada desde la funcion principal        
         float obtenerCapital()
         {
-            float total;
+            float total=0;
             for (list<Cuenta>::iterator it = cuentas.begin(); it != cuentas.end(); it++) {
                 total = total + it->saldo;
             }
