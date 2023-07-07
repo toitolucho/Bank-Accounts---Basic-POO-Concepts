@@ -1,5 +1,6 @@
 
 #include <list >
+#include <limits>
 #include "Persona.cpp"
 // #include "Banco.cpp"
 #include "Servicio.cpp"
@@ -35,7 +36,7 @@ private:
 
 	TipoCuenta tipo;
 	Banco* entidad;
-	list<Transaccion> transaccion;
+	list<Transaccion> transacciones;
 	int nroT;
 public:
 	int nroCuenta;
@@ -66,12 +67,33 @@ public:
 		duenio = titular;
 	}
 
+	Cuenta(int _nro_cuenta, float _saldo,int _tipo, Persona _duenio) {
+		nroCuenta = _nro_cuenta;
+		saldo = _saldo;
+		duenio = _duenio;
+		switch (_tipo)
+		{
+		case 1: tipo = CajaAhorro; break;
+		case 2: tipo = PlazoFijo; break;
+		case 3: tipo = Empresarial; break;
+		}
+	}
+
 	void depositar(float monto)
 	{
 		saldo += monto;
 
 		nroT++;
-		transaccion.push_back(Transaccion(2, 2, 2023, nroT, monto, DEPOSITO));
+		transacciones.push_back(Transaccion(2, 2, 2023, nroT, monto, DEPOSITO));
+
+	}
+
+	void depositar(float monto, Fecha f1)
+	{
+		saldo += monto;
+
+		nroT++;
+		transacciones.push_back(Transaccion(f1.dia, f1.mes, f1.anio, nroT, monto, DEPOSITO));
 
 	}
 
@@ -87,7 +109,7 @@ public:
 	{
 		saldo -= monto;
 		nroT++;
-		transaccion.push_back(Transaccion(2, 2, 2023, nroT, monto, RETIRO));
+		transacciones.push_back(Transaccion(2, 2, 2023, nroT, monto, RETIRO));
 	}
 	void transferir(float monto, Cuenta destino)
 	{
@@ -97,7 +119,7 @@ public:
 			destino.depositar(monto);
 
 			nroT++;
-			transaccion.push_back(Transaccion(2, 2, 2023, nroT, monto, TRANSFERENCIA));
+			transacciones.push_back(Transaccion(2, 2, 2023, nroT, monto, TRANSFERENCIA));
 		}
 	}
 
@@ -108,7 +130,7 @@ public:
 			retirar(serv.getCosto());
 
 			nroT++;
-			transaccion.push_back(Transaccion(2, 2, 2023, nroT, serv.getCosto(), PAGO_SERVICIO));
+			transacciones.push_back(Transaccion(2, 2, 2023, nroT, serv.getCosto(), PAGO_SERVICIO));
 
 		}
 	}
@@ -129,9 +151,21 @@ public:
 		// cout<<"Entidad Bancaria" << entidad.nombre<<endl;
 	}
 
+	list<Transaccion> getTransacciones()
+	{
+		return transacciones;
+	}
 
-	//D) Incopore una clase Transaccion que permita representar todos los movimientos de una cuenta.
-	// los mivimientos deben realizarse  en un DEPOSITO, RETIRO, TRANSFERENCIA Y UN PAGO SERVICIO
-	// los attributos de la clase seran los siguientes: Fecha, NroTransaccion (Autoenumerable), Monto, Tipo(DEPOSITO, RETIRO, TRANSFERENCIA Y UN PAGO SERVICIO) enumeracion
+	string getTipo() {
+		switch (tipo)
+		{
+		case CajaAhorro: return "Caja de Ahorro";
+			break;
+		case PlazoFijo: return "Plazo Fijo";
+			break;
+		case Empresarial: return "Empresarial";
+			break;
+		}
+	}
 };
 #endif 

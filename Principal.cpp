@@ -1,68 +1,87 @@
 #include <iostream>
+#include <vector>
 #include "Banco.cpp"
 #include "BancoDataReader.cpp"
-
+#include "Probador.cpp"
 using namespace std;
+const int NumeroArchivos = 3;
 
+void MostrarDatos(vector<vector<Banco>> banco) {
 
-//esta funcion permite volcar cualquier numero n pequenio
-//por ejemplo si n = 12, entonces la respuesta sera x = 21
-short volcar(short n)
-{
-    short x,d;
-    x = 0;
-    while(n!=0)
-    {
-        d = n%10;
-        n = n/10;
-        x = x*10+d;
-    }
-    return x;
-}
-
-int obtenerSigHoraPalindroma(short h, short m)
-{
-    short h1=h, m1=m;  
-    do
-    {
-        m1++;
-        if(m1==60)
-        {
-            m1=0;
-            h1 = h1+1 ;   
-        }        
-        if(h1 == 24)
-            h1 = 0;
-        cout<<h1<<" "<<m1<<endl;
-    }
-    while(h1!= volcar(m1));
     
-    return h1*60+m1;
+	for (int k = 0; k < NumeroArchivos; k++) {
+		cout << "Mostrando los datos cargados del TXT " << k+1 << " ..." << endl;
+		for (int i = 0; i < banco[k].size(); i++) {
+			cout << banco[k][i].getIdBanco() << endl;
+			cout << banco[k][i].nombre << endl;
+			cout << banco[k][i].getDireccion() << endl;
+
+			list<Cuenta>::iterator it = banco[k][i].getListaCuentas().begin();
+
+			for (int j = 0; j < banco[k][i].getListaCuentas().size(); j++) {
+				cout << it->nroCuenta << " " << it->saldo << " " << it->getTipo() << " " << it->duenio.getCi() << " " << it->duenio.getNombreCompleto();
+				cout << " " << it->duenio.getFechaNacimiento().dia;
+				cout << " " << it->duenio.getFechaNacimiento().mes;
+				cout << " " << it->duenio.getFechaNacimiento().anio << endl;
+				it++;
+			}
+			cout << endl;
+		}
+	}
 }
+
+
+//A) Realize un metodo que permita generar 12 Pagos de sueldos a TODAS las cuentas de un Banco, 
+//considerando que representaran los pagos de cada mes y las mismas se realizan cada primero del mes
+void generarDepositos(Banco &b1, float monto)
+{
+    
+}
+
+//B) Realize un metodo que permita visualizar todas las transacciones que se hicieron a lo largo de un periodo de tiempo
+void visualizarTransacciones (Banco b1, int mesInicio, int mesFin)
+{
+    //Debe visualizar, El duennio(Nombre Apellido), el tipo de Transaccion, el Monto, y el Mes
+}
+
+//C) Dado un vector de bancos, obtenga el total de capital acumulado de todos los bancos
+float obtenerCapitalTotal(vector<Banco> b1)
+{
+    return 0;
+}
+
+
+//D) Obtenga dentro de un vector la lista de los clientes cumpleanieros de un banco considerando el mes de una fecha
+vector<Banco> obtenerListaCumpleanieros(Banco b1, Fecha f1)
+{
+    //utilize la funcion, cumpleEsteMes()
+    vector<Banco>  resp;
+
+    return resp;
+}
+
 int main()
 {
-    // short h1,m1;
-    // cin>>h1>>m1;
-    // if(h1 == volcar(m1))
-    // {
-    //     //aca se deben considerar condiciones de formato
-    //     cout<<h1<<":"<<m1<<":00 Hora Palindroma"<<endl;
-    // }
-    // else
-    // {
-    //     //aca se deben considerar condiciones de formato
-    //     cout<<h1<<":"<<m1<<":00 No es Hora Palindroma"<<endl;
-    // }
-    // int sighp = obtenerSigHoraPalindroma(h1,m1);
-    // //aca se deben considerar condiciones de formato
-    // cout<<sighp/60<<":"<<sighp%60<<endl;
 
 
-    Banco b1;
-    b1.verInfo();
-    cout<<b1.obtenerCapital()<<endl;
-    BancoDataReader* b = BancoDataReader::getInstance();
+    // Banco b1;
+    // b1.verInfo();
+    // cout<<b1.obtenerCapital()<<endl;
+    // BancoDataReader* b = BancoDataReader::getInstance();
+    Probador verif;
 
+    // MostrarDatos(verif.LeerDatosPrueba());
+    vector<Banco> listaBancos = verif.LeerDatosPrueba()[0];
+
+    MostrarDatos(verif.LeerDatosPrueba());
+   // cout<< listaBancos[1].nombre<<endl;
+
+    //Pregunta A
+    generarDepositos(listaBancos[1], 1000);
+    //Pregunta B
+    visualizarTransacciones(listaBancos[1], 1,12);
+     //Pregunta C
+    cout<<"Capital Total"<< obtenerCapitalTotal(listaBancos);
     return 0;
 
 

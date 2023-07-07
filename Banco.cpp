@@ -39,9 +39,28 @@ class Banco
             cout<<"Nombre Banco : "<<nombre<<endl;
             cout<<"Direccion "<<direccion<<endl;
         }
-        //A) Complete la funcion para calcular el total de dinero que tiene actualmente el banco como fondo base por parte de sus clientes.
-        //la funcion debe devolver el valor calculado, puede utilizar temporalmente la impresion en consola, se evaluara que el valor
-        //sea invocada y visualizada desde la funcion principal        
+
+        int getIdBanco() {
+		    return idBanco;
+        }
+        void setNombre(string _nombre) {
+            nombre = _nombre;
+        }
+        void setDireccion(string _direccion) {
+            direccion = _direccion;
+        }
+        void setIdBanco(int _id_banco) {
+            idBanco = _id_banco;
+        }
+
+        list<Cuenta> &getListaCuentas() {
+		    return cuentas;
+        }
+        string getDireccion() {
+            return direccion;
+        }
+
+        
         float obtenerCapital()
         {
             float total=0;
@@ -50,8 +69,7 @@ class Banco
             }
             return total;
         }
-        //B) complete la funcion para obtener el cliente mas potencial, considerando aquel que tiene una cuenta con saldo grande
-        //la funcion debe devolver a la persona como tal
+        
         Persona *obtenerClientePotencial()
         {
            Persona* p = nullptr;

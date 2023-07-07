@@ -18,7 +18,7 @@ public:
 	//referencia a la unica instancia posible de la clase
 	static BancoDataReader* getInstance() {
 		if (instance == nullptr) {
-			instance = new BancoDataReader;
+			instance = new BancoDataReader();
 		}
 		return instance;
 	}

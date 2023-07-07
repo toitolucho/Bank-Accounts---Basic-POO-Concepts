@@ -31,6 +31,15 @@ class Persona
             apellidos = "Molina";
         }
 
+        Persona(int _ci,int _dia, int _mes, int _anio, string _nombre, string _apellido) {
+            nombres = _nombre;
+            apellidos = _apellido;
+            ci = _ci;
+            fechaNacimiento.dia = _dia;
+            fechaNacimiento.mes = _mes;
+            fechaNacimiento.anio = _anio;
+        }
+
         string getNombreCompleto()
         {
             return nombres + " " + apellidos;
@@ -87,6 +96,12 @@ class Persona
         {
             return fechaActual.dia == fechaNacimiento.dia
                 && fechaActual.mes == fechaNacimiento.mes;
+        }
+
+        bool cumpleEsteMes(Fecha fechaActual)
+        {
+            return fechaActual.mes == fechaNacimiento.mes;
+
         }
 };
 
